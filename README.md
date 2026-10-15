@@ -64,7 +64,7 @@ The analysis performs descriptive statistics, two-sample Welch's t-tests, and co
 2. Click on `analysis.py` to open the file in the editor.
 3. Click the **Run Python File** button at the top right of the editor window.
 4. The statistical outputs and test results will display in the bottom panel.
-5. All generated plots will be saved directly into the `figures/plot results/` folder.
+5. All generated plots will be saved directly into the `figures/` folder.
 
 ---
 
