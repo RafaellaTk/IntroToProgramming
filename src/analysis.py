@@ -91,6 +91,7 @@ plt.ylabel("Star Count")
 plt.legend()
 plt.tight_layout()
 plt.savefig(f"{output_dir}/amag_histogram.png", dpi=300)
+plt.show()
 plt.close()
 
 # ----------------- Plot 2: Histogram of Color Index ------------------------
@@ -103,6 +104,7 @@ plt.ylabel("Star Count")
 plt.legend()
 plt.tight_layout()
 plt.savefig(f"{output_dir}/bv_histogram.png", dpi=300)
+plt.show()
 plt.close()
 
 # ----------------- Plot 3: Observational HR Diagram ------------------------
@@ -116,6 +118,7 @@ plt.gca().invert_yaxis()
 plt.legend()
 plt.tight_layout()
 plt.savefig(f"{output_dir}/hr_diagram.png", dpi=300)
+plt.show()
 plt.close()
 
 # ----------------- Plot 4: Error Bar / Separation Plot --------------------
@@ -154,4 +157,5 @@ ax.set_title("Mean ± 1 SD Comparison")
 ax.set_xlim(0.4, 2.6)
 plt.tight_layout()
 plt.savefig(f"{output_dir}/separation_errorbars.png", dpi=300)
+plt.show()
 plt.close()
