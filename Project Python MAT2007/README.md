@@ -14,7 +14,7 @@ The analysis performs descriptive statistics, two-sample Welch's t-tests, and co
 
 ## Dataset & Reproducibility
 
-- **Dataset Source:** The dataset originates from the Hipparcos star catalog and is publicly available on [Kaggle](www.kaggle.com/datasets/vinesmsuic/star-categorization-giants-and-dwarfs).
+- **Dataset Source:** The dataset originates from the Hipparcos star catalog and is publicly available on [Kaggle](https://www.kaggle.com/datasets/vinesmsuic/star-categorization-giants-and-dwarfs).
 - **File Location:** The dataset file is located in the `data` folder as `stars.csv`.
 - **Data Cleaning:** **No manual data cleaning is required.** The Python script automatically cleans missing and invalid entries (`Amag`, `B-V`, `TargetClass`) upon execution using built-in filtering (`dropna`) before performing any calculations.
 
