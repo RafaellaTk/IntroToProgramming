@@ -71,12 +71,13 @@ The analysis performs descriptive statistics, two-sample Welch's t-tests, and co
 ## Results & Visualizations
 
 ### Observational Hertzsprung–Russell (H–R) Diagram
-![H-R Diagram](figures/plot%20results/hr_diagram.png)
+![H-R Diagram](figures/hr_diagram.png)
 
 ### Separation & Error Bars
-![Separation Error Bars](figures/plot%20results/separation_errorbars.png)
+![Separation Error Bars](figures/separation_errorbars.png)
 
 ### Parameter Distribution Histograms
-| Absolute Magnitude ($Amag$) | Color Index ($B-V$) |
+
+| Absolute Magnitude ($Amag$) | Color Index ($B - V$) |
 | :---: | :---: |
-| ![Amag Histogram](figures/plot%20results/amag_histogram.png) | ![B-V Histogram](figures/plot%20results/bv_histogram.png) |
+| ![Amag Histogram](figures/amag_histogram.png) | ![B-V Histogram](figures/bv_histogram.png) |
