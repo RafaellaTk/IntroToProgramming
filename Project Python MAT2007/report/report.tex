@@ -1,0 +1,75 @@
+```latex
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+\title{\textbf{Quantitative Stellar Property Discrimination: Dwarfs vs. Giants}}
+\author{Data Analysis Project --- Visual Studio Code Local Framework}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Problem Description \& Context}
+Stellar classification forms the foundation of modern astrophysics and observational stellar evolution. Dwarf and giant stars represent distinctly different evolutionary phases characterized by disparate interior structures, radiative transfer mechanisms, and effective temperatures. 
+
+This project investigates the following research question:
+\begin{quote}
+\textit{Which single observational stellar property---Absolute Magnitude ($Amag$) or Color Index ($B-V$)---serves as the strongest quantitative discriminator between Dwarf stars and Giant stars?}
+\end{quote}
+Identifying the single parameter that yields the highest separability provides insight into observational stellar taxonomy and validates theoretical boundaries on the Color-Magnitude (Hertzsprung-Russell) plane.
+
+\section{Dataset Description}
+The analysis utilizes an observational stellar catalog derived from the European Space Agency's \textbf{Hipparcos} mission. The dataset records high-precision astrometric and photometric parameters for thousands of stars. For the scope of this evaluation, the dataset was filtered to extract:
+\begin{itemize}
+    \item \textbf{Color Index ($B-V$):} A proxy for effective stellar surface temperature, calculated from the magnitude difference in standard photometric filters.
+    \item \textbf{Absolute Magnitude ($Amag$):} The intrinsic visual luminosity of the star, normalized to a standard distance of 10 parsecs.
+    \item \textbf{TargetClass:} The categorical binary ground truth indicating evolutionary stage ($0$ for Dwarfs, $1$ for Giants).
+\end{itemize}
+All incomplete records with missing photometric parameters were systematically removed, yielding a verified sample containing 1,821 confirmed Giant stars alongside the primary Dwarf population.
+
+\section{Quantitative Methodology}
+Rather than relying on qualitative visual inspection, discrimination strength was evaluated through a rigorous statistical framework using Welch's two-sample $t$-test. For each candidate feature $X \in \{Amag, B\text{-}V\}$, we compute:
+\begin{equation}
+    t = \frac{\bar{X}_{\text{Dwarfs}} - \bar{X}_{\text{Giants}}}{\sqrt{\frac{s_{\text{Dwarfs}}^2}{N_{\text{Dwarfs}}} + \frac{s_{\text{Giants}}^2}{N_{\text{Giants}}}}}
+\end{equation}
+where $\bar{X}$ denotes the sample mean, $s^2$ the sample variance, and $N$ the sample size. A higher absolute value $|t|$ directly corresponds to superior statistical divergence between the two classes relative to intra-class variance.
+
+\section{Results \& Analysis}
+The quantitative computations performed locally via the Python framework yielded the following statistical metrics:
+
+\begin{table}[h]
+\centering
+\caption{Two-Sample Statistical Discriminative Metrics}
+\vspace{2mm}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Stellar Parameter} & \textbf{Absolute Value $|t|$-score} & \textbf{Statistical Significance ($p$-value)} \\
+\midrule
+Absolute Magnitude ($Amag$) & 42.89 & $p < 10^{-10}$ \\
+Color Index ($B-V$)          & \textbf{47.23} & $p < 10^{-10}$ \\
+\bottomrule
+\end{tabular}
+\label{tab:metrics}
+\end{table}
+
+Both parameters display extreme statistical significance ($p \ll 0.001$), confirming substantial physical divergence between both populations. However, the Color Index ($B-V$) establishes a significantly higher test statistic ($|t| = 47.23$) compared to Absolute Magnitude ($|t| = 42.89$).
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.95\linewidth]{../figures/results_plot.png}
+\caption{Left: Empirical Color-Magnitude diagram contrasting Dwarfs (blue) and Giants (red). Right: Distribution boxplot of the dominant discriminator ($B-V$).}
+\label{fig:results}
+\end{figure}
+
+The observational Color-Magnitude diagram (Figure~\ref{fig:results}, left) demonstrates clear topological separation: Giants occupy a well-defined diagonal branch characterized by lower median $B-V$ indices, whereas Dwarfs demonstrate broader dispersion centered at higher color index values ($\text{median} \approx 1.1$). The boxplot distribution (Figure~\ref{fig:results}, right) reinforces the superior localized clustering of the color index.
+
+\section{Conclusion}
+The quantitative findings conclusively demonstrate that **Color Index ($B-V$)** acts as the stronger individual discriminator between Dwarf and Giant stars in this catalog. Consequently, photometric color measurements offer superior initial classification power prior to distance-dependent absolute magnitude derivations.
+
+\end{document}
