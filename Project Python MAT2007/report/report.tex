@@ -1,7 +1,7 @@
 \documentclass[11pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{geometry}
-\geometry{margin=0.85in}
+\geometry{margin=0.75in}
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{amsmath}
@@ -9,7 +9,11 @@
 
 \title{\textbf{Quantitative Stellar Property Discrimination: Dwarfs vs. Giants}}
 \author{Data Analysis Project --- Visual Studio Code Local Framework}
-\date{\today}
+\date{September -- October 2026}
+
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
 
 \begin{document}
 \maketitle
@@ -17,7 +21,7 @@
 \section{Problem Description \& Context}
 Stellar classification forms the foundation of modern astrophysics and observational stellar evolution. Dwarf and giant stars represent distinctly different evolutionary phases characterized by disparate interior structures, radiative transfer mechanisms, and effective temperatures.
 
-This project investigates the following research question:
+\noindent This project investigates the following research question:
 \begin{quote}
 \textit{Which single observational stellar property---Absolute Magnitude ($Amag$) or Color Index ($B-V$)---serves as the strongest quantitative discriminator between Dwarf stars and Giant stars?}
 \end{quote}
@@ -30,18 +34,18 @@ The analysis utilizes an observational stellar catalog derived from the European
     \item \textbf{Absolute Magnitude ($Amag$):} The intrinsic visual luminosity of the star, normalized to a standard distance of 10 parsecs.
     \item \textbf{TargetClass:} The categorical binary ground truth indicating evolutionary stage ($0$ for Giants, $1$ for Dwarfs).
 \end{itemize}
-All incomplete records with missing photometric parameters were systematically removed programmatically using \texttt{dropna()} across critical features ($Amag$, $B-V$, and $TargetClass$), ensuring an uncorrupted and reproducible sample.
+All incomplete records with missing photometric parameters were systematically removed programmatically using \texttt{dropna()} across critical features ($Amag$, $B-V$, and $TargetClass$), ensuring an uncorrupted and reliable sample.
 
 \section{Quantitative Methodology}
-Rather than relying solely on qualitative visual inspection, discrimination strength was evaluated through a twofold statistical framework implemented locally in Python:
+To quantitatively measure how well each parameter separates Dwarf and Giant stars, the analysis uses two statistical methods in Python:
 \begin{enumerate}
-    \item \textbf{Welch's Two-Sample $t$-Test:} Accounting for unequal subpopulation sample sizes and unequal variances:
+    \item \textbf{Welch's Two-Sample $t$-test:} Accounting for unequal subpopulation sample sizes and unequal variances:
     \begin{equation}
         t = \frac{\bar{X}_{\text{Giants}} - \bar{X}_{\text{Dwarfs}}}{\sqrt{\frac{s_{\text{Giants}}^2}{N_{\text{Giants}}} + \frac{s_{\text{Dwarfs}}^2}{N_{\text{Dwarfs}}}}}
     \end{equation}
     where $\bar{X}$ denotes the sample mean, $s^2$ the variance, and $N$ the sample count.
     
-    \item \textbf{Standardized Mean Separation Score ($S$):} To directly compare the two features on an equivalent, scale-independent metric:
+    \item \textbf{Standardized Mean Separation Score ($S$):} To compare both properties on an equal, unitless scale:
     \begin{equation}
         S = \frac{|\bar{X}_{\text{Giants}} - \bar{X}_{\text{Dwarfs}}|}{\frac{s_{\text{Giants}} + s_{\text{Dwarfs}}}{2}}
     \end{equation}
@@ -50,7 +54,7 @@ Rather than relying solely on qualitative visual inspection, discrimination stre
 \section{Results \& Analysis}
 The quantitative computations performed locally via the Python framework yielded the following comparative outcomes across both parameters:
 
-\begin{table}[h]
+\begin{table}[!ht]
 \centering
 \caption{Two-Sample Statistical Discriminative Metrics}
 \vspace{2mm}
@@ -67,18 +71,18 @@ Color Index ($B-V$)          & \textbf{47.23} & $p < 10^{-10}$ & Evaluated \\
 
 Both parameters exhibit extreme statistical significance ($p \ll 0.001$), confirming pronounced physical divergence between evolutionary groups. 
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 \centering
-\includegraphics[width=0.88\linewidth]{../figures/plot results/hr_diagram.png}
+\includegraphics[width=0.62\linewidth]{"plot results/hr_diagram.png"}
 \caption{Observational Hertzsprung--Russell Diagram showing color index ($B-V$) against absolute magnitude ($Amag$) for Dwarf (blue) and Giant (red) stars.}
 \label{fig:hr}
 \end{figure}
 
 As illustrated in the observational Color-Magnitude diagram (Figure~\ref{fig:hr}), Giant stars occupy a distinct region toward brighter luminosities, while Dwarfs follow the dominant main sequence track. The accompanying spread comparison (Figure~\ref{fig:errorbars}) highlights the divergence in population means relative to their internal variance spreads.
 
-\begin{figure}[h!]
+\begin{figure}[!t]
 \centering
-\includegraphics[width=0.88\linewidth]{../figures/plot results/separation_errorbars.png}
+\includegraphics[width=0.75\linewidth]{"plot results/separation_errorbars.png"}
 \caption{Subpopulation mean and $\pm 1\sigma$ spread comparison across $Amag$ and $B-V$.}
 \label{fig:errorbars}
 \end{figure}
